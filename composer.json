@@ -1,5 +1,5 @@
 {
-    "name": "phppocket/widgets",
+    "name": "phpocket/widgets",
     "description": "Lightweight widgets",
     "keywords": ["php", "framework"],
     "type": "library",
