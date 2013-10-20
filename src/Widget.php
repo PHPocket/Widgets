@@ -52,6 +52,19 @@ abstract class Widget implements WidgetInterface
     }
 
     /**
+     * Converts boolean to string
+     *
+     * @param bool   $boolean
+     * @param string $true
+     * @param string $false
+     * @return string
+     */
+    public function b2s($boolean, $true = 'true', $false = 'false')
+    {
+        return $boolean ? $true : $false;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @return string

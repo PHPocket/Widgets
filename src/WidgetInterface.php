@@ -16,7 +16,7 @@ interface WidgetInterface
      *
      * @param int $context
      *
-     * @return string|null Null returned for no content
+     * @return string|array|null Null returned for no content
      */
     public function getValue($context);
 
