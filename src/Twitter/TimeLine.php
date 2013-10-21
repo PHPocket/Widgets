@@ -6,8 +6,6 @@ use PHPocket\Widgets\Widget;
 
 class TimeLine extends Widget
 {
-    const SCRIPT = "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
-
     protected $_widgetID;
 
     protected $_noHeader;
@@ -16,6 +14,20 @@ class TimeLine extends Widget
     protected $_noBorder;
     protected $_transparent;
 
+
+    static private $_script;
+    /**
+     * Returns script
+     *
+     * @return string
+     */
+    static public function getScript()
+    {
+        if (empty(self::$_script)) {
+            self::$_script = trim(file_get_contents(__DIR__ . '/timeline.tpl'));
+        }
+        return self::$_script;
+    }
 
     /**
      * Constructor
@@ -34,7 +46,8 @@ class TimeLine extends Widget
         $noFooter = false,
         $noBorder = false,
         $noScroll = false
-    ) {
+    )
+    {
         $this->_widgetID = $widgetID;
         $this->_transparent = $transparent;
         $this->_noHeader = $noHeader;
@@ -64,7 +77,7 @@ class TimeLine extends Widget
                     . ($this->_noBorder ? 'noborders ' : '')
                     . ($this->_noScroll ? 'noscrollbar ' : '')
                     . '">&nbsp;</a>' . PHP_EOL
-                    . self::SCRIPT . PHP_EOL;
+                    . self::getScript() . PHP_EOL;
             default:
                 return $this->_widgetID;
         }

@@ -59,7 +59,16 @@ class Coub extends Widget
      * @param bool  $noSiteButtons
      * @param bool  $hd            start with HD quality
      */
-    function __construct($idOrUrl, $width, $height, $autoStart = false, $startMuted = false, $hideTop = false, $noSiteButtons = false, $hd = false)
+    function __construct(
+        $idOrUrl,
+        $width,
+        $height,
+        $autoStart = false,
+        $startMuted = false,
+        $hideTop = false,
+        $noSiteButtons = false,
+        $hd = false
+    )
     {
         $this->_id = self::resolveID($idOrUrl);
         $this->_autoStart = (bool) $autoStart;
@@ -117,7 +126,8 @@ class Coub extends Widget
                     . '&hideTopBar='    . $this->b2s($this->_hideTop)
                     . '&startWithHD='   . $this->b2s($this->_hd)
                     . '" allowfullscreen="true" frameborder="0" '
-                    . 'width="' . $this->_width . '" height="' . $this->_height . '">'
+                    . 'width="' . $this->_width
+                    . '" height="' . $this->_height . '">'
                     . '</iframe>'
                     ;
             // Plaintext content
