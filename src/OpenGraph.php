@@ -77,11 +77,13 @@ class OpenGraph extends Widget
      */
     protected static function isSSL()
     {
-        if( !empty( $_SERVER['https'] ) )
+        if ( getenv('https') != '') {
             return true;
+        }
 
-        if( !empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' )
+        if (getenv('HTTP_X_FORWARDED_PROTO') == 'https') {
             return true;
+        }
 
         return false;
     }
@@ -137,7 +139,7 @@ class OpenGraph extends Widget
                             . $value[0]
                             .  '" />' . PHP_EOL;
                     } else {
-                        foreach($value as $row) {
+                        foreach ($value as $row) {
                             $answer .= '<meta property="og:'
                                 . $key
                                 . '" content="'
