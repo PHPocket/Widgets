@@ -1,26 +1,20 @@
 
 tools:
-  php_cpd:
-    command: phpcpd
-      # Minimum number of identical lines (default: 5)
-      min_lines: 5
-      # Minimum number of identical tokens (default: 70)
-      min_tokens: 70
-      # A list of names that should be scanned (default: '*.php')
-      names:
-        # Default:
-        - '*.php'
-      # A list of excluded directories.
-      excluded_dirs: ["vendor", "tests"]
-  php_code_sniffer:
-    extensions:
-        - php
-    command: phpcs
-    enabled: true
-    filter:
-        paths: ["app/src/*"]
-    config:
-        standard: Zend
-  php_code_coverage: true
-    test_command: phpunit -c tests/phpunit.xml
-  php_mess_detector: true
+    php_cpd:
+        command: phpcpd
+        excluded_dirs: ["vendor", "tests"]
+
+    php_code_sniffer:
+        extensions:
+            - php
+        command: phpcs
+        enabled: true
+        filter:
+            paths: ["app/src/*"]
+        config:
+            standard: Zend
+
+    php_code_coverage: true
+        test_command: phpunit -c tests/phpunit.xml
+
+    php_mess_detector: true
