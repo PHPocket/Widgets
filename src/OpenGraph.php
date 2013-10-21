@@ -113,8 +113,8 @@ class OpenGraph extends Widget
         return $this->replace(
             self::TAG_TITLE,
             'http' . (self::isSSL() ? 's' : '') . '://'
-            . $_SERVER['HTTP_HOST']
-            . $_SERVER['REQUEST_URI']
+            . getenv('HTTP_HOST')
+            . getenv('REQUEST_URI')
         );
     }
 
