@@ -18,12 +18,12 @@ tools:
     php_code_coverage:
         test_command: phpunit -c tests/phpunit.xml
 
-    php_mess_detector: true
+    php_mess_detector:
         filter:
             excluded_paths: [vendor/*, tests/*]
-    php_analyzer: true
+    php_analyzer:
         filter:
             excluded_paths: [vendor/*, tests/*]
-    sensiolabs_security_checker: true
+    sensiolabs_security_checker:
         filter:
             excluded_paths: [vendor/*, tests/*]
