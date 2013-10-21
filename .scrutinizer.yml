@@ -1,18 +1,16 @@
 
-excluded_paths: [vendor/*, tests/*]
+
 
 tools:
     php_cpd:
         command: phpcpd
-        excluded_dirs: ["vendor", "tests"]
+        excluded_paths: [vendor/*, tests/*]
 
     php_code_sniffer:
         extensions:
             - php
         command: phpcs
         enabled: true
-        filter:
-            paths: ["app/src/*"]
         config:
             standard: Zend
 
@@ -20,5 +18,8 @@ tools:
         test_command: phpunit -c tests/phpunit.xml
 
     php_mess_detector: true
+        excluded_paths: [vendor/*, tests/*]
     php_analyzer: true
+        excluded_paths: [vendor/*, tests/*]
     sensiolabs_security_checker: true
+        excluded_paths: [vendor/*, tests/*]
