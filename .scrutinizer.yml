@@ -5,7 +5,7 @@ tools:
     php_cpd:
         command: phpcpd
         filter:
-            excluded_paths: [vendor, tests]
+            excluded_paths: [vendor, tests/unit]
 
     php_code_sniffer:
         extensions:
@@ -14,16 +14,18 @@ tools:
         enabled: true
         config:
             standard: Zend
+        filter:
+            excluded_paths: [vendor, tests/unit]
 
     php_code_coverage:
         test_command: phpunit -c tests/phpunit.xml
 
     php_mess_detector:
         filter:
-            excluded_paths: [vendor, tests]
+            excluded_paths: [vendor, tests/unit]
     php_analyzer:
         filter:
-            excluded_paths: [vendor, tests]
+            excluded_paths: [vendor, tests/unit]
     sensiolabs_security_checker:
         filter:
-            excluded_paths: [vendor, tests]
+            excluded_paths: [vendor, tests/unit]
