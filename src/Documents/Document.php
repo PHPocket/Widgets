@@ -15,34 +15,11 @@ abstract class Document implements WidgetInterface
 {
 
     /**
-     * Common data
+     * Document's data
      *
      * @var Data
      */
     public $data;
-    /**
-     * Models data
-     *
-     * @var Data
-     */
-    public $models;
-    /**
-     * Text data
-     *
-     * @var Data
-     */
-    public $texts;
-    /**
-     * Settings data
-     *
-     * @var Data
-     */
-    public $settings;
-    /**
-     * Performance associative array
-     *
-     * @var array
-     */
     public $performance;
 
     /**
@@ -58,9 +35,6 @@ abstract class Document implements WidgetInterface
         } else {
             // We are first element
             $this->data = new Data();
-            $this->models = new Data();
-            $this->texts = new Data();
-            $this->settings = new Data();
             $this->performance = array();
         }
     }
@@ -68,9 +42,6 @@ abstract class Document implements WidgetInterface
     public function linkDataFrom(Document $doc)
     {
         $this->data = $doc->data;
-        $this->models = $doc->models;
-        $this->texts = $doc->texts;
-        $this->settings = $doc->settings;
         $this->performance = &$doc->performance;
     }
 
