@@ -57,7 +57,7 @@ class Coub extends Widget
      * @param bool  $startMuted
      * @param bool  $hideTop
      * @param bool  $noSiteButtons
-     * @param bool  $hd            start with HD quality
+     * @param bool  $startHD            start with HD quality
      */
     function __construct(
         $idOrUrl,
@@ -67,7 +67,7 @@ class Coub extends Widget
         $startMuted = false,
         $hideTop = false,
         $noSiteButtons = false,
-        $hd = false
+        $startHD = false
     )
     {
         $this->_id = self::resolveID($idOrUrl);
@@ -79,7 +79,7 @@ class Coub extends Widget
             $this->_noSiteButtons = (bool) $noSiteButtons;
         }
         $this->_startMuted = $this->_autoStart && (bool)$startMuted;
-        $this->_hd = $this->_autoStart && (bool) $hd;
+        $this->_hd = $this->_autoStart && (bool) $startHD;
 
         $this->_width = $width;
         $this->_height = $height;
