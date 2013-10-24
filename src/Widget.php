@@ -2,6 +2,8 @@
 
 namespace PHPocket\Widgets;
 
+use PHPocket\Widgets\Documents\Document;
+
 /**
  * Static container for current global display context
  * You can override it value by calling
@@ -14,6 +16,11 @@ namespace PHPocket\Widgets;
  */
 abstract class Widget implements WidgetInterface
 {
+
+    /**
+     * @var Document
+     */
+    static protected $_currentDocument = null;
 
     /**
      * Current global context
@@ -65,14 +72,53 @@ abstract class Widget implements WidgetInterface
     }
 
     /**
+     * Raises dependency (if needed) and
+     *
+     * @return Hook[]
+     */
+    protected function getHooks()
+    {
+        return array();
+    }
+
+    /**
+     * Prints contents of widget
+     *
+     * @param int|null $context
+     * @return void
+     */
+    public function show($context = null)
+    {
+        if (empty($context)) {
+            $context = self::getGlobalContext();
+        }
+        echo $this->getValue($context);
+        foreach ($this->getHooks() as $hook) {
+            echo  $hook->getValue($context);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @return string
      */
-    public function __toString()
+    public final function __toString()
     {
-        try{
-            $value = $this->getValue(self::getGlobalContext());
+        $context = self::getGlobalContext();
+        try {
+            $value = $this->getValue($context);
+            foreach ($this->getHooks() as $hook) {
+                if (self::$_currentDocument !== null) {
+                    // Registering
+                    self::$_currentDocument->registerHook($hook);
+                } else {
+                    // Displaying
+                    if (!$hook->isBuildOnly()) {
+                        $value .= $hook->getValue($context);
+                    }
+                }
+            }
             if ($value === null) return '';
             return $value;
         } catch (\Exception $e) {

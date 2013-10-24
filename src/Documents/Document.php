@@ -3,7 +3,8 @@
 namespace PHPocket\Widgets\Documents;
 
 use PHPocket\Widgets\Documents\Components\Data;
-use PHPocket\Widgets\WidgetInterface;
+use PHPocket\Widgets\Hook;
+use PHPocket\Widgets\Widget;
 
 /**
  * Base document
@@ -11,7 +12,7 @@ use PHPocket\Widgets\WidgetInterface;
  *
  * @package PHPocket\Widgets\Documents
  */
-abstract class Document implements WidgetInterface
+class Document extends Widget
 {
 
     /**
@@ -20,7 +21,20 @@ abstract class Document implements WidgetInterface
      * @var Data
      */
     public $data;
+
+    /**
+     * Performance statistics
+     *
+     * @var array
+     */
     public $performance;
+
+    /**
+     * List of assigned hooks
+     *
+     * @var Hook[]
+     */
+    protected $_hooks;
 
     /**
      * Constructor
@@ -37,8 +51,16 @@ abstract class Document implements WidgetInterface
             $this->data = new Data();
             $this->performance = array();
         }
+
+        // Registering itself as root document
+        Widget::$_currentDocument = $this;
     }
 
+    /**
+     * Inherits data from provided document
+     *
+     * @param Document $doc
+     */
     public function linkDataFrom(Document $doc)
     {
         $this->data = $doc->data;
@@ -46,15 +68,26 @@ abstract class Document implements WidgetInterface
     }
 
     /**
-     * @return string
+     * Registers new hook
+     *
+     * @param Hook $hook
      */
-    public final function __toString()
+    public function registerHook(Hook $hook)
     {
-        try{
-            return $this->getValue(self::HTML_FULL);
-        } catch( \Exception $e ) {
-            // TODO Exception rendering
-            return '';
-        }
+        $this->_hooks[] = $hook;
     }
+
+    /**
+     * Returns value of widget in requested context
+     *
+     * @param int $context
+     *
+     * @return string|array|null Null returned for no content
+     */
+    public function getValue($context)
+    {
+        return 'Stub document for ' . $context;
+    }
+
+
 }

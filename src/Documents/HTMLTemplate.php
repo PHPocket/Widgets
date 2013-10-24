@@ -30,7 +30,7 @@ class HTMLTemplate extends Document
 
     public function resolveFilename($filename)
     {
-        throw new \Exception('Not implemented');
+        throw new \Exception('Not implemented ' . $filename);
     }
 
     /**
@@ -74,11 +74,12 @@ class HTMLTemplate extends Document
         // Starting buffering
         ob_start();
         // Starting benchmark
-        $t = microtime(true);
+        $startedAt = microtime(true);
         // Parsing
         include $this->_filename;
         // Registering benchmark values
-        $this->performance['out.parse.' . $this->_name] = microtime(true) - $t;
+        $this->performance['out.parse.' . $this->_name] =
+            microtime(true) - $startedAt;
         // Return
         return ob_end_clean();
     }

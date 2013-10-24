@@ -6,7 +6,7 @@ namespace PHPocket\Widgets\Documents;
 class HTMLTemplateLayout extends HTMLTemplate
 {
 
-    public function show ($final = true, $charset = 'utf-8')
+    public function show($final = true, $charset = 'utf-8')
     {
         if (!headers_sent()) {
             header('Content-Type: text/html; charset=' . $charset);

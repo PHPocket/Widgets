@@ -2,6 +2,7 @@
 
 namespace PHPocket\Widgets\Twitter;
 
+use PHPocket\Widgets\Hooks\SingletonHTMLString;
 use PHPocket\Widgets\Widget;
 
 class TimeLine extends Widget
@@ -57,6 +58,16 @@ class TimeLine extends Widget
     }
 
     /**
+     *
+     *
+     * @return array
+     */
+    public function getHooks()
+    {
+        return array(new SingletonHTMLString(self::getScript()));
+    }
+
+    /**
      * Returns value of widget in requested context
      *
      * @param int $context
@@ -76,8 +87,7 @@ class TimeLine extends Widget
                     . ($this->_noFooter ? 'nofooter ' : '')
                     . ($this->_noBorder ? 'noborders ' : '')
                     . ($this->_noScroll ? 'noscrollbar ' : '')
-                    . '">&nbsp;</a>' . PHP_EOL
-                    . self::getScript() . PHP_EOL;
+                    . '">&nbsp;</a>' . PHP_EOL;
             default:
                 return $this->_widgetID;
         }
