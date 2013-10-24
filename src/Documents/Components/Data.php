@@ -9,6 +9,11 @@ namespace PHPocket\Widgets\Documents\Components;
  */
 class Data implements \Countable
 {
+
+    static private $_booleans = array(
+        'true', 'y', 'yes', 'on', 'enable', 'enabled'
+    );
+
     /**
      * Container with data
      *
@@ -110,16 +115,15 @@ class Data implements \Countable
     public function setBool($key, $value)
     {
         if (empty($value)) {
-            $value = false;
+            $this->set($key, false);
+        } else if (is_string($value)) {
+            $this->set(
+                $key,
+                in_array(strtolower(trim($value)), self::$_booleans)
+            );
         } else {
-            $value = $value === true || $value === 1
-                || strtolower($value) === 'true'
-                || $value === 'y' || $value === 'e'
-                || $value === 'yes' || $value === 'on'
-                || $value == 'enable' || $value === 'enabled';
+            $this->set($key, $value === true || $value === 1);
         }
-
-        $this->set($key, $value);
     }
 
     /**
