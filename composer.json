@@ -15,7 +15,7 @@
         "phpmd/phpmd": "dev-master"
     },
     "autoload": {
-        "psr-0": { "PHPocket\\Widgets\\": "" },
-        "target-dir": "src"
-    }
+        "psr-0": { "PHPocket\\Widgets\\": "src" }
+    },
+    "target-dir": "PHPocket\\Widgets"
 }
