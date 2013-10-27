@@ -1,11 +1,12 @@
 <?php
 
-namespace PHPocket\Widgets\Tests;
+namespace PHPocket\Widgets\Tests\Common;
 
 
-use PHPocket\Widgets\Number;
+use PHPocket\Widgets\Common\Number;
+use PHPocket\Widgets\Tests\AbstractWidgetTest;
 
-class NumberTest extends \PHPUnit_Framework_TestCase
+class NumberTest extends AbstractWidgetTest
 {
     public function testPrecision()
     {

@@ -7,7 +7,6 @@ interface WidgetInterface
 {
     const PLAINTEXT       = 10;
 
-    const HTML            = 2020;
     const HTML_SIMPLIFIED = 2010;
     const HTML_FULL       = 2020;
 

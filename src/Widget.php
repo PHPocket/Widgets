@@ -45,23 +45,10 @@ abstract class Widget implements WidgetInterface
     {
         if (empty(self::$_currentGlobalContext)) {
             // Autodetect & force HTML
-            self::$_currentGlobalContext = WidgetInterface::HTML;
+            self::$_currentGlobalContext = WidgetInterface::HTML_FULL;
         }
 
         return self::$_currentGlobalContext;
-    }
-
-    /**
-     * Converts boolean to string
-     *
-     * @param bool   $boolean
-     * @param string $true
-     * @param string $false
-     * @return string
-     */
-    public function b2s($boolean, $true = 'true', $false = 'false')
-    {
-        return $boolean ? $true : $false;
     }
 
     /**
@@ -71,8 +58,9 @@ abstract class Widget implements WidgetInterface
      */
     public function __toString()
     {
-        try{
-            $value = $this->getValue(self::getGlobalContext());
+        $context = self::getGlobalContext();
+        try {
+            $value = $this->getValue($context);
             if ($value === null) return '';
             return $value;
         } catch (\Exception $e) {
