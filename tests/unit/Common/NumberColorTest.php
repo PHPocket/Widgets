@@ -1,11 +1,19 @@
 <?php
-namespace PHPocket\Widgets\Tests;
+namespace PHPocket\Widgets\Tests\Common;
 
 
-use PHPocket\Widgets\NumberColor;
+use PHPocket\Widgets\Common\NumberColor;
 
 class NumberColorTest extends NumberTest
 {
+    public function testTpl()
+    {
+        $this->assertTpl(
+            __DIR__ . '/NumberColor',
+            'PHPocket\Widgets\Common\NumberColor'
+        );
+    }
+
     public function testColor()
     {
         $x = new NumberColor(15);

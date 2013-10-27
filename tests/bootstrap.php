@@ -19,5 +19,8 @@ spl_autoload_register(
     }
 );
 
+// Loading abstract class
+include_once __DIR__ . '/AbstractWidgetTest.php';
+
 // Loading widgets autoloader
 require __DIR__ . '/../autoload.php';
