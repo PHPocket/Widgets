@@ -138,4 +138,14 @@ class Coub extends Widget
         }
     }
 
+    /**
+     * Converts bool to string
+     *
+     * @param bool $bool
+     * @return string
+     */
+    private function b2s($bool)
+    {
+        return $bool ? 'true' : 'false';
+    }
 }

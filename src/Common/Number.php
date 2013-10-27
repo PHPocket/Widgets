@@ -1,6 +1,8 @@
 <?php
 
-namespace PHPocket\Widgets;
+namespace PHPocket\Widgets\Common;
+
+use PHPocket\Widgets\Widget;
 
 /**
  * Widget for numbers with provided precision

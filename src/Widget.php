@@ -2,8 +2,6 @@
 
 namespace PHPocket\Widgets;
 
-use PHPocket\Widgets\Documents\Document;
-
 /**
  * Static container for current global display context
  * You can override it value by calling
@@ -16,11 +14,6 @@ use PHPocket\Widgets\Documents\Document;
  */
 abstract class Widget implements WidgetInterface
 {
-
-    /**
-     * @var Document
-     */
-    static protected $_currentDocument = null;
 
     /**
      * Current global context
@@ -52,50 +45,10 @@ abstract class Widget implements WidgetInterface
     {
         if (empty(self::$_currentGlobalContext)) {
             // Autodetect & force HTML
-            self::$_currentGlobalContext = WidgetInterface::HTML;
+            self::$_currentGlobalContext = WidgetInterface::HTML_FULL;
         }
 
         return self::$_currentGlobalContext;
-    }
-
-    /**
-     * Converts boolean to string
-     *
-     * @param bool   $boolean
-     * @param string $true
-     * @param string $false
-     * @return string
-     */
-    public function b2s($boolean, $true = 'true', $false = 'false')
-    {
-        return $boolean ? $true : $false;
-    }
-
-    /**
-     * Raises dependency (if needed) and
-     *
-     * @return Hook[]
-     */
-    protected function getHooks()
-    {
-        return array();
-    }
-
-    /**
-     * Prints contents of widget
-     *
-     * @param int|null $context
-     * @return void
-     */
-    public function show($context = null)
-    {
-        if (empty($context)) {
-            $context = self::getGlobalContext();
-        }
-        echo $this->getValue($context);
-        foreach ($this->getHooks() as $hook) {
-            echo  $hook->getValue($context);
-        }
     }
 
     /**
@@ -103,22 +56,11 @@ abstract class Widget implements WidgetInterface
      *
      * @return string
      */
-    public final function __toString()
+    public function __toString()
     {
         $context = self::getGlobalContext();
         try {
             $value = $this->getValue($context);
-            foreach ($this->getHooks() as $hook) {
-                if (self::$_currentDocument !== null) {
-                    // Registering
-                    self::$_currentDocument->registerHook($hook);
-                } else {
-                    // Displaying
-                    if (!$hook->isBuildOnly()) {
-                        $value .= $hook->getValue($context);
-                    }
-                }
-            }
             if ($value === null) return '';
             return $value;
         } catch (\Exception $e) {

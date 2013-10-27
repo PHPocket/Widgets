@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPocket\Widgets;
+namespace PHPocket\Widgets\Common;
 
 /**
  * Widget for colorized numbers
