@@ -3,6 +3,8 @@
 namespace PHPocket\Widgets;
 
 
+use PHPocket\IO\PrintWriterInterface;
+
 interface WidgetInterface
 {
     const PLAINTEXT       = 10;
@@ -18,6 +20,15 @@ interface WidgetInterface
      * @return string|array|null Null returned for no content
      */
     public function getValue($context);
+
+    /**
+     * Prints content of widget to provided printer
+     *
+     * @param PrintWriterInterface $writer
+     * @param int                  $context
+     * @return void
+     */
+    public function writeValue(PrintWriterInterface $writer, $context);
 
     /**
      * Any widget must override this method

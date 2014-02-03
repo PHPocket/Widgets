@@ -2,7 +2,7 @@
 namespace PHPocket\Widgets;
 
 /**
- * Opengraph builder for page
+ * OpenGraph builder for page
  * You must ensure, that xml namespace declared as
  * <html prefix="og: http://ogp.me/ns#">
  *

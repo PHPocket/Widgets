@@ -1,6 +1,8 @@
 <?php
 
 namespace PHPocket\Widgets;
+use PHPocket\IO\PrintWriterInterface;
+use PHPocket\IO\PrintWriters\StringBuffer;
 
 /**
  * Static container for current global display context
@@ -52,20 +54,46 @@ abstract class Widget implements WidgetInterface
     }
 
     /**
+     * Prints content of widget to provided printer
+     *
+     * @param PrintWriterInterface $writer
+     * @param int                  $context
+     * @return void
+     */
+    public function writeValue(PrintWriterInterface $writer, $context)
+    {
+        $writer->write($this->_safeValue($context));
+    }
+
+    /**
+     * Returns value without exception
+     *
+     * @param int $context
+     * @return string
+     */
+    protected function _safeValue($context)
+    {
+        try {
+            return $this->getValue($context);
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @return string
      */
     public function __toString()
     {
-        $context = self::getGlobalContext();
-        try {
-            $value = $this->getValue($context);
-            if ($value === null) return '';
-            return $value;
-        } catch (\Exception $e) {
-            return '';
-        }
+        $sb = new StringBuffer();
+        $this->writeValue(
+            $sb,
+            self::getGlobalContext()
+        );
+
+        return $sb->getString();
     }
 
 }

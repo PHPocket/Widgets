@@ -17,4 +17,4 @@ vendor/bin/phpcs --report=summary --standard=Zend src/
 echo
 echo "PHPUnit testing"
 echo "==============="
-vendor/bin/phpunit -c tests --process-isolation --strict
+vendor/bin/phpunit

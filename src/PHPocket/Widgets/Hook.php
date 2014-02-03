@@ -7,8 +7,8 @@ use PHPocket\Widgets\Documents\Document;
 /**
  * Base class for all hooks
  *
- *
  * @package PHPocket\Widgets
+ * @deprecated Functionality not ready
  */
 abstract class Hook extends Widget
 {

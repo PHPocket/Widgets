@@ -8,6 +8,7 @@ namespace PHPocket\Widgets;
  * presentation level
  *
  * @package PHPocket\Widgets
+ * @deprecated Functionality not ready
  */
 abstract class LinkedWidget extends Widget
 {

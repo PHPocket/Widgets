@@ -1,23 +1,16 @@
 <?php
 
-namespace PHPocket\Widgets;
+namespace PHPocket\Widgets\Tests;
 
-// Autoloader for widgets
+// Registering own tests autoloader
 spl_autoload_register(
     function($className)
     {
-        // Validating namespace
         if (substr($className, 0, strlen(__NAMESPACE__)) !== __NAMESPACE__) {
             return;
         }
-        // Excluding tests
-        if (strpos($className, __NAMESPACE__ . '\\Tests') === 0) {
-            return;
-        }
-
-        // Including folder
         include __DIR__
-            . '/src/'
+            . '/test/unit/'
             . substr(
                 str_replace('\\', '/', $className),
                 strlen(__NAMESPACE__) + 1
@@ -25,3 +18,6 @@ spl_autoload_register(
             . '.php';
     }
 );
+
+// Loading abstract class
+include_once __DIR__ . '/test/AbstractWidgetTest.php';
